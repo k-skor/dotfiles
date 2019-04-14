@@ -1,0 +1,20 @@
+
+. /usr/share/powerline/bindings/bash/powerline.sh
+
+JAVA_HOME=/usr/java/latest/
+
+ANDROID_HOME=$HOME/Android/Sdk
+PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+# Ranger functions
+function ranger-cd {
+    tempfile="$(mktemp -t tmp.XXXXXX)"
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}
+
+alias config='/usr/bin/git --git-dir=/home/krzy0s/.cfg/ --work-tree=/home/krzy0s'
