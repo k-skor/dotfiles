@@ -1,0 +1,15 @@
+
+# Quick edit config
+map X chain shell vim -p ~/.config/ranger/rc.conf %rangerdir/config/rc.conf; source ~/.config/ranger/rc.conf
+
+# Filter
+map f console scout -ftsea%space
+
+# Open tmux with current dir
+#map <C-t> shell tmux split-window -c %d -v
+#map <s-t> shell tmux split-window -c %d -h
+map tv shell tmux split-window -c %d -h
+map th shell tmux split-window -c %d -v
+#map <s-n> shell tmux new-window -c %d
+map tn shell tmux new-window -c %d
+map <s-t> eval p("test")
