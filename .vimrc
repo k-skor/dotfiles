@@ -14,6 +14,12 @@ Plugin 'kien/ctrlp.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'vim-airline/vim-airline'
+
+Plugin 'Raimondi/delimitMate'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -48,6 +54,30 @@ set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
 nnoremap <F10> :b <C-Z>
 
+set nu
+
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+nnoremap <Leader>l :ls<CR>
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <M-1> :1b<CR>
+nnoremap <M-2> :2b<CR>
+nnoremap <M-3> :3b<CR>
+nnoremap <M-4> :4b<CR>
+nnoremap <M-5> :5b<CR>
+nnoremap <M-6> :6b<CR>
+nnoremap <M-7> :7b<CR>
+nnoremap <M-8> :8b<CR>
+nnoremap <M-9> :9b<CR>
+
+" Workaround fixing colors inside tmux
+set background=dark
+
 " Suggestions from: https://realpython.com/vim-and-python-a-match-made-in-heaven
 " Enable folding
 set foldmethod=indent
@@ -81,20 +111,10 @@ set encoding=utf-8
 nnoremap <C-B> :CtrlPBuffer<CR>
 nnoremap <C-M> :CtrlPMRUFiles<CR>
 
-" jedi-vim
-"let g:jedi#use_tabs_not_buffers = 1
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#popup_select_first = 0
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-
-" vim-powerline
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
