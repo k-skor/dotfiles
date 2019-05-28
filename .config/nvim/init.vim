@@ -1,0 +1,174 @@
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+" === start ncm2 stuff ===
+" assuming you're using vim-plug: https://github.com/junegunn/vim-plug
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+
+" NOTE: you need to install completion sources to get completions. Check
+" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-pyclang'
+
+" based on ultisnips
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'SirVer/ultisnips'
+" ===== end ncm2 stuff ===
+
+" === start helpers ===
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/denite.nvim'
+" ===== end helpers ===
+
+" === start managers ===
+"Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'Shougo/vimfiler.vim'
+" ===== end managers ===
+
+" Initialize plugin system
+call plug#end()
+
+let g:python3_host_prog = "/home/krzy0s/python/.neovim/venv/bin/python"
+
+" Built in function mappings
+set hidden
+set confirm
+set autoindent
+set splitbelow
+set splitright
+set nu
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <Tab> <C-W>
+nnoremap <S-Tab> <C-W>W
+
+set wildchar=<Tab> wildmenu wildmode=full
+set wildcharm=<C-Z>
+nnoremap <C-b> :b <C-Z>
+
+nnoremap <C-b>r :bp\|bd #<CR>
+"nnoremap <C-b>d :bd<CR>
+nnoremap <C-b>e DeleteEmptyBuffers()<CR>
+nnoremap <C-e> :e<space>
+nnoremap <C-s> :so %<CR>
+map <esc> :noh<CR>
+
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+nnoremap <Leader>l :ls<CR>
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <M-1> :1b<CR>
+nnoremap <M-2> :2b<CR>
+nnoremap <M-3> :3b<CR>
+nnoremap <M-4> :4b<CR>
+nnoremap <M-5> :5b<CR>
+nnoremap <M-6> :6b<CR>
+nnoremap <M-7> :7b<CR>
+nnoremap <M-8> :8b<CR>
+nnoremap <M-9> :9b<CR>
+
+" === start FUNCTIONS ===
+function! BufferIsEmpty()
+    if line('$') == 1 && getline(1) == ''
+        return 1
+    else
+        return 0
+    endif
+endfunction
+
+function! DeleteEmptyBuffers()
+    let [i, n; empty] = [1, bufnr('$')]
+    while i <= n
+"        if bufexists(i) && bufname(i) == ''
+        if bufloaded(i) && bufname(i) == '' && getbufline(i, 1, 2) == ['']
+            call add(empty, i)
+        endif
+        let i += 1
+    endwhile
+    echo len(empty)
+    if len(empty) > 0
+        exe 'bdelete' join(empty)
+    endif
+endfunction
+" ===== end FUNCTIONS ===
+
+" Suggestions from: https://realpython.com/vim-and-python-a-match-made-in-heaven
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" PEP 8 code standard
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+" Code standard for other types
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+
+" Flag unnecessary whitespaces
+highlight BadWhitespace ctermbg=red guibg=red
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+set encoding=utf-8
+
+" Ctrl-p function
+"nnoremap <C-B> :CtrlPBuffer<CR>
+"nnoremap <C-M> :CtrlPMRUFiles<CR>
+
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" Press enter key to trigger snippet expansion
+" The parameters are the same as `:help feedkeys()`
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+
+" c-j c-k for moving in snippet
+" let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+
+" VimFiler
+"let g:vimfiler_define_wrapper_commands = 1
+noremap <Leader>d :VimFilerExplorer<CR>
+
+" Denite
+
