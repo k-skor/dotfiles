@@ -93,6 +93,9 @@ nnoremap <M-7> :7b<CR>
 nnoremap <M-8> :8b<CR>
 nnoremap <M-9> :9b<CR>
 
+" disable netrw
+let loaded_netrwPlugin = 1
+
 " === start FUNCTIONS ===
 function! BufferIsEmpty()
     if line('$') == 1 && getline(1) == ''
@@ -117,6 +120,23 @@ function! DeleteEmptyBuffers()
     endif
 endfunction
 " ===== end FUNCTIONS ===
+
+" ncm2
+" suppress the annoying 'match x of y', 'The only match' and 'Pattern not
+" found' messages
+set shortmess+=c
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Suggestions from: https://realpython.com/vim-and-python-a-match-made-in-heaven
 " Enable folding
@@ -156,6 +176,7 @@ set encoding=utf-8
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
+" UltiSnips
 " Press enter key to trigger snippet expansion
 " The parameters are the same as `:help feedkeys()`
 inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
