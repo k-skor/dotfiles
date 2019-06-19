@@ -193,6 +193,7 @@ noremap <Leader>d :VimFilerExplorer<CR>
 " Denite
 
 
+" Neomake
 " When writing a buffer (no delay).
 call neomake#configure#automake('w')
 " When writing a buffer (no delay), and on normal mode changes (
@@ -203,3 +204,6 @@ call neomake#configure#automake('rw', 1000)
 " Full config: when writing or reading a buffer, and on changes in insert and normal mode (after 1s; no delay when writing).
 call neomake#configure#automake('nrwi', 500)
 
+let g:neomake_open_list=2
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
