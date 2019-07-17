@@ -45,6 +45,10 @@ Plug 'Shougo/vimfiler.vim'
 Plug 'ludovicchabant/vim-gutentags'
 " ===== end managers ===
 
+" === start editing ===
+Plug 'tpope/vim-surround'
+" ===== end editing ====
+
 " Initialize plugin system
 call plug#end()
 
@@ -87,6 +91,8 @@ nnoremap <Leader>l :ls<CR>
 nnoremap <Leader>b :bp<CR>
 nnoremap <Leader>f :bn<CR>
 nnoremap <Leader>g :e#<CR>
+nnoremap <C-Left> :bp<CR>
+nnoremap <C-Right> :bn<CR>
 nnoremap <M-1> :1b<CR>
 nnoremap <M-2> :2b<CR>
 nnoremap <M-3> :3b<CR>
@@ -216,6 +222,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " VimFiler
 "let g:vimfiler_define_wrapper_commands = 1
+let g:vimfiler_as_default_explorer = 1
 noremap <Leader>d :VimFilerExplorer<CR>
 
 " Denite
