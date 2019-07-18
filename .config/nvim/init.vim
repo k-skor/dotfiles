@@ -42,6 +42,7 @@ Plug 'neomake/neomake'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'Shougo/vimfiler.vim'
+Plug 'ludovicchabant/vim-gutentags'
 " ===== end managers ===
 
 " === start editing ===
@@ -168,16 +169,22 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix
 
 " Code standard for other types
-au BufNewFile,BufRead *.js,*.html,*.css
+au BufNewFile,BufRead *.js,*.html,*.css,*.vue
     \ set tabstop=2 |
     \ set softtabstop=2 |
-    \ set shiftwidth=2
+    \ set shiftwidth=2 |
+    \ set expandtab
 
 " Flag unnecessary whitespaces
 highlight BadWhitespace ctermbg=red guibg=red
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 set encoding=utf-8
+
+" === start custom filetypes ===
+au BufRead,BufNewFile *.vue
+    \ set filetype=javascript
+" ===== end custom filetypes ===
 
 " === start ncm2 ===
 " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
@@ -225,6 +232,7 @@ nnoremap <Leader>d :Denite<space>
 nnoremap <Leader>db :Denite buffer<CR>
 nnoremap <Leader>de :Denite file<CR>
 
+" Neomake
 " When writing a buffer (no delay).
 call neomake#configure#automake('w')
 " When writing a buffer (no delay), and on normal mode changes (
@@ -235,3 +243,17 @@ call neomake#configure#automake('rw', 1000)
 " Full config: when writing or reading a buffer, and on changes in insert and normal mode (after 1s; no delay when writing).
 call neomake#configure#automake('nrwi', 500)
 
+let g:neomake_open_list=2
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
+
+" gutentags
+let g:gutentags_define_advanced_commands = 1
+"let g:gutentags_project_info = [
+"      \ {
+"      \ 'type': 'javascript',
+"      \ 'file': 'package.json'
+"      \ }
+"      \]
+"let g:gutentags_file_list_command = 'find . -type f -iregex ".*\.\(js\|vue\)$" -not -path "./node_modules/*"'
+"let g:gutentags_ctags_executable_javascript = $PWD .'./node_modules/.bin/jsctags -f'
