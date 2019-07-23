@@ -17,4 +17,3 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
-alias config='/usr/bin/git --git-dir=/home/krzy0s/.cfg/ --work-tree=/home/krzy0s'
