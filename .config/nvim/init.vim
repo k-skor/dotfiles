@@ -78,7 +78,10 @@ nnoremap <C-b> :b <C-Z>
 nnoremap <C-b>r :bp\|bd #<CR>
 "nnoremap <C-b>d :bd<CR>
 nnoremap <C-b>e DeleteEmptyBuffers()<CR>
-nnoremap <C-e> :e<space>
+"nnoremap <C-e> :e<space>
+nnoremap <Leader>b :b <C-Z>
+nnoremap <Leader>bd :bp\|bd #<CR>
+nnoremap <Leader>be DeleteEmptyBuffers()<CR>
 nnoremap <C-s> :so %<CR>
 map <esc> :noh<CR>
 
@@ -88,9 +91,9 @@ map <esc> :noh<CR>
 " \b \f \g : go back/forward/last-used
 " \1 \2 \3 : go to buffer 1/2/3 etc
 nnoremap <Leader>l :ls<CR>
-nnoremap <Leader>b :bp<CR>
-nnoremap <Leader>f :bn<CR>
-nnoremap <Leader>g :e#<CR>
+"nnoremap <Leader>b :bp<CR>
+"nnoremap <Leader>f :bn<CR>
+"nnoremap <Leader>g :e#<CR>
 nnoremap <C-Left> :bp<CR>
 nnoremap <C-Right> :bn<CR>
 nnoremap <M-1> :1b<CR>
@@ -124,7 +127,6 @@ function! DeleteEmptyBuffers()
         endif
         let i += 1
     endwhile
-    echo len(empty)
     if len(empty) > 0
         exe 'bdelete' join(empty)
     endif
@@ -223,10 +225,12 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 " VimFiler
 "let g:vimfiler_define_wrapper_commands = 1
 let g:vimfiler_as_default_explorer = 1
-noremap <Leader>d :VimFilerExplorer<CR>
+nnoremap <Leader>f :VimFilerExplorer<CR>
 
 " Denite
-
+nnoremap <Leader>d :Denite<space>
+nnoremap <Leader>db :Denite buffer<CR>
+nnoremap <Leader>de :Denite file<CR>
 
 " Neomake
 " When writing a buffer (no delay).
