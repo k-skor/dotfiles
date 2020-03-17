@@ -1,0 +1,16 @@
+source ~/.bashrc.ubuntu.local
+
+alias 7z='7z.exe'
+alias docker='docker.exe'
+alias docker-compose='docker-compose.exe'
+
+#source X Server settings
+if [ -f "$HOME/bin/x_setup" ]; then
+  source "$HOME/bin/x_setup"
+fi
+
+export PATH=$PATH:/mnt/c/Program\ Files/7-Zip/
+
+if [ -z $DISPLAY ]; then
+  export DISPLAY=:0
+fi

@@ -1,12 +1,21 @@
-
-. /usr/share/powerline/bindings/bash/powerline.sh
-
+# Ubuntu specific extensions
 JAVA_HOME=/usr/java/latest/
 
 ANDROID_HOME=$HOME/Android/Sdk
 PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+PATH=$PATH:$HOME/.local/bin
+
+TMUX_POWERLINE_CONF="$HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
 
 # Ranger functions
+if [ -f `which powerline-daemon` ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+#  . /usr/share/powerline/bindings/bash/powerline.sh
+  . $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+fi
+
 function ranger-cd {
     tempfile="$(mktemp -t tmp.XXXXXX)"
     /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
@@ -17,3 +26,10 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
+#set PATH to include user's private bin if exists
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin:$PATH"
+  if [ -f "$HOME/bin/x_setup" ]; then
+    source "$HOME/bin/x_setup"
+  fi
+fi
