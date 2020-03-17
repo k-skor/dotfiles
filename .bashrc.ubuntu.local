@@ -5,7 +5,7 @@ ANDROID_HOME=$HOME/Android/Sdk
 PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 PATH=$PATH:$HOME/.local/bin
 
-TMUX_POWERLINE_CONF="$HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
+export TMUX_POWERLINE_CONF="$HOME/.local/lib/python3.6/site-packages/powerline/bindings/tmux/powerline.conf"
 
 # Ranger functions
 if [ -f `which powerline-daemon` ]; then
@@ -13,7 +13,7 @@ if [ -f `which powerline-daemon` ]; then
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
 #  . /usr/share/powerline/bindings/bash/powerline.sh
-  . $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+  . $HOME/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 fi
 
 function ranger-cd {

@@ -1,9 +1,9 @@
 
 # add Fedora specific extensions
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+ANDROID_HOME=$HOME/Android/Sdk
+PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-TMUX_POWERLINE_CONF="$HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf"
+export TMUX_POWERLINE_CONF="$HOME/.local/lib/python3.6/site-packages/powerline/bindings/tmux/powerline.conf"
 
 if [ -f `which powerline-daemon` ]; then
   powerline-daemon -q
