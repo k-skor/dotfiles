@@ -33,7 +33,7 @@ Plug 'SirVer/ultisnips'
 
 " === start helpers ===
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim', { 'tag': '2.1' }
 Plug 'neomake/neomake'
 " ===== end helpers ===
 
@@ -48,6 +48,10 @@ Plug 'ludovicchabant/vim-gutentags'
 " === start editing ===
 Plug 'tpope/vim-surround'
 " ===== end editing ====
+
+" === start prettying ===
+Plug 'ryanoasis/vim-devicons'
+" ===== end prettying ===
 
 " Initialize plugin system
 call plug#end()
@@ -173,6 +177,10 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 "let g:vimfiler_define_wrapper_commands = 1
 let g:vimfiler_as_default_explorer = 1
 nnoremap <Leader>f :VimFilerExplorer<CR>
+augroup vimfiler
+	autocmd!
+	autocmd FileType vimfiler nunmap <buffer> <leader>
+augroup END
 
 " Denite
 nnoremap <Leader>d :Denite<space>
@@ -195,7 +203,7 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 
 " gutentags
-let g:gutentags_define_advanced_commands = 1
+let g:gutentags_project_root = ['Makefile']
 "let g:gutentags_project_info = [
 "      \ {
 "      \ 'type': 'javascript',
