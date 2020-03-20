@@ -25,6 +25,7 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-pyclang'
+Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 
 " based on ultisnips
 Plug 'ncm2/ncm2-ultisnips'
@@ -198,17 +199,7 @@ call neomake#configure#automake('rw', 1000)
 " Full config: when writing or reading a buffer, and on changes in insert and normal mode (after 1s; no delay when writing).
 call neomake#configure#automake('nrwi', 500)
 
-let g:neomake_open_list=2
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-
 " gutentags
-let g:gutentags_project_root = ['Makefile']
-"let g:gutentags_project_info = [
-"      \ {
-"      \ 'type': 'javascript',
-"      \ 'file': 'package.json'
-"      \ }
-"      \]
-"let g:gutentags_file_list_command = 'find . -type f -iregex ".*\.\(js\|vue\)$" -not -path "./node_modules/*"'
-"let g:gutentags_ctags_executable_javascript = $PWD .'./node_modules/.bin/jsctags -f'
+"let g:gutentags_trace = 1
+"let g:gutentags_define_advanced_commands = 1
+let g:gutentags_project_root = ['Makefile', 'package.json']
