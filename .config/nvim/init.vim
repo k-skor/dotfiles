@@ -26,6 +26,8 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-pyclang'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+Plug 'ncm2/ncm2-vim'
+Plug 'ncm2/ncm2-neoinclude'
 
 " based on ultisnips
 Plug 'ncm2/ncm2-ultisnips'
@@ -74,6 +76,11 @@ set background=dark
 highlight BadWhitespace ctermbg=LightRed guibg=LightRed
 au FileType python,cpp match BadWhitespace /\s\+$/
 
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal expandtab
+
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -92,8 +99,11 @@ nnoremap <C-b>e DeleteEmptyBuffers()<CR>
 nnoremap <Leader>b :b <C-Z>
 nnoremap <Leader>bd :bp\|bd #<CR>
 nnoremap <Leader>be DeleteEmptyBuffers()<CR>
-nnoremap <C-s> :so %<CR>
-map <esc> :noh<CR>
+nnoremap <silent> <C-s> :so %<CR>
+map <silent> <esc> :noh<CR>
+nnoremap <silent> <tab> :bn<CR>
+nnoremap <silent> <S-tab> :bp<CR>
+nnoremap <Leader>bc :close<CR>
 
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
@@ -143,6 +153,10 @@ function! DeleteEmptyBuffers()
 endfunction
 " ===== end FUNCTIONS ===
 
+" === START COMMANDS ===
+com! Config :e $MYVIMRC
+" ===  END COMMANDS  ===
+
 " === start ncm2 ===
 " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
 " found' messages
@@ -171,23 +185,24 @@ inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
 " c-j c-k for moving in snippet
 " let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsJumpForwardTrigger	= "<c-l>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-h>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " VimFiler
 "let g:vimfiler_define_wrapper_commands = 1
 let g:vimfiler_as_default_explorer = 1
-nnoremap <Leader>f :VimFilerExplorer<CR>
+nnoremap ff :VimFilerExplorer<CR>
 augroup vimfiler
 	autocmd!
 	autocmd FileType vimfiler nunmap <buffer> <leader>
 augroup END
 
 " Denite
-nnoremap <Leader>d :Denite<space>
-nnoremap <Leader>db :Denite buffer<CR>
-nnoremap <Leader>de :Denite file<CR>
+nnoremap fd :Denite<space>
+nnoremap fb :Denite buffer<CR>
+nnoremap fe :Denite file<CR>
+nnoremap fa :Denite file/old<CR>
 
 " Neomake
 " When writing a buffer (no delay).
@@ -199,8 +214,3 @@ call neomake#configure#automake('nw', 750)
 call neomake#configure#automake('rw', 1000)
 " Full config: when writing or reading a buffer, and on changes in insert and normal mode (after 1s; no delay when writing).
 call neomake#configure#automake('nrwi', 500)
-
-" gutentags
-"let g:gutentags_trace = 1
-"let g:gutentags_define_advanced_commands = 1
-let g:gutentags_project_root = ['Makefile', 'package.json']
