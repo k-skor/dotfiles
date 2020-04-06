@@ -48,6 +48,7 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " === start editing ===
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/a.vim'
 " ===== end editing ====
 
 " === start prettying ===
