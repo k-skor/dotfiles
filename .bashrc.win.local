@@ -1,8 +1,14 @@
+export ANDROID_HOME=/mnt/c/Users/krskorcz/AppData/Local/Android/Sdk
+CHROME_PATH="/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe"
+export CHROME_BIN=$CHROME_PATH
+export CHROMIUM_BIN=$CHROME_PATH
+
 source ~/.bashrc.ubuntu.local
 
 alias 7z='7z.exe'
 alias docker='docker.exe'
 alias docker-compose='docker-compose.exe'
+alias adb='adb.exe'
 
 #source X Server settings
 if [ -f "$HOME/bin/x_setup" ]; then
@@ -10,6 +16,7 @@ if [ -f "$HOME/bin/x_setup" ]; then
 fi
 
 export PATH=$PATH:/mnt/c/Program\ Files/7-Zip/
+export PATH=$PATH:$HOME/.local/scrcpy/:$HOME/.local/pidcat
 
 if [ -z $DISPLAY ]; then
   export DISPLAY=:0

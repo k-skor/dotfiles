@@ -34,6 +34,10 @@ Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 " ===== end ncm2 stuff ===
 
+" === start dev ===
+Plug 'davidhalter/jedi-vim'
+" ===  end dev  ===
+
 " === start helpers ===
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/denite.nvim', { 'tag': '2.1' }
@@ -51,11 +55,15 @@ Plug 'ludovicchabant/vim-gutentags'
 " === start editing ===
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/a.vim'
+Plug 'Chiel92/vim-autoformat'
 " ===== end editing ====
 
 " === start prettying ===
 Plug 'ryanoasis/vim-devicons'
 " ===== end prettying ===
+
+" === start extensions ===
+Plug 'vimwiki/vimwiki'
 
 " Initialize plugin system
 call plug#end()
@@ -173,6 +181,10 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " ===== end ncm2 ===
+
+" === START jedi ===
+let g:jedi#auto_vim_configuration = 0
+" ===  END jedi  ===
 
 " vim-airline
 let g:airline_powerline_fonts = 1
