@@ -7,7 +7,8 @@ fi
 PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 PATH=$PATH:$HOME/.local/bin
 
-export POWERLINE_BINDINGS="$HOME/.local/lib/python3.6/site-packages/powerline/bindings/"
+PYTHON3_SITE_PACKAGES_PATH=$(python3 -m site --user-site)
+export POWERLINE_BINDINGS="$PYTHON3_SITE_PACKAGES_PATH/powerline/bindings/"
 
 if [ -f `which powerline-daemon` ]; then
   powerline-daemon -q
