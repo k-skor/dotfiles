@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -z "{DISPLAY}" ]; then
+  if [ -n "${SSH_CLIENT}" ]; then
+    export DISPLAY='localhost:10'
+  else
+    export DISPLAY=:0
+  fi
+fi
