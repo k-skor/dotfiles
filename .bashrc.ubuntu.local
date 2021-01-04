@@ -31,11 +31,3 @@ function ranger-cd {
 
 alias ranger2='python2.7 /usr/bin/ranger'
 
-#set PATH to include user's private bin if exists
-if [ -d "$HOME/bin" ]; then
-  export PATH="$HOME/bin:$PATH"
-  if [ -f "$HOME/bin/x_setup" ]; then
-    source "$HOME/bin/x_setup"
-  fi
-fi
-
