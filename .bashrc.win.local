@@ -10,14 +10,5 @@ alias docker='docker.exe'
 alias docker-compose='docker-compose.exe'
 alias adb='adb.exe'
 
-#source X Server settings
-if [ -f "$HOME/bin/x_setup" ]; then
-  source "$HOME/bin/x_setup"
-fi
-
 export PATH=$PATH:/mnt/c/Program\ Files/7-Zip/
 export PATH=$PATH:$HOME/.local/scrcpy/:$HOME/.local/pidcat
-
-if [ -z $DISPLAY ]; then
-  export DISPLAY=:0
-fi

@@ -1,9 +1,13 @@
 #!/bin/sh
 
-if [ -z "{DISPLAY}" ]; then
-  if [ -n "${SSH_CLIENT}" ]; then
-    export DISPLAY='localhost:10'
-  else
-    export DISPLAY=:0
-  fi
+if [ "${DISPLAY}" == ":0" ]; then
+	DISPLAY=
+fi
+
+if [ -z "${DISPLAY}" ]; then
+    if [ -n "${SSH_CLIENT}" ]; then
+        export DISPLAY='localhost:10'
+    else
+        export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
+    fi
 fi

@@ -31,3 +31,6 @@ function ranger-cd {
 
 alias ranger2='python2.7 /usr/bin/ranger'
 
+if [ -f `which x_setup` ]; then
+    . x_setup
+fi
